@@ -7,10 +7,10 @@ namespace webapi_RepositoryPattern_demo02.Repositories
     {
         public IQueryable<T> GetAll(bool trackChanges)
         {
-            return
-                //!trackChanges ?
-                //ApplicationContext.Set<T>().AsNoTracking() :
-                //ApplicationContext.Set<T>();
+            //return
+            !trackChanges ?
+            ApplicationContext.Set<T>().AsNoTracking() :
+            ApplicationContext.Set<T>();
         }
             
         //{
@@ -18,21 +18,27 @@ namespace webapi_RepositoryPattern_demo02.Repositories
         //}
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
         {
-            throw new NotImplementedException();
+            !trackChanges ?
+                ApplicationContext.Set<T>().Where(expression).AsNoTracking() :
+                ApplicationContext.Set<T>().Where(expression);
+            //throw new NotImplementedException();
         }
 
         public void Create(T entity)
         {
-            throw new NotImplementedException();
+            ApplicationContext.Set<T>().Add(entity);
+            //throw new NotImplementedException();
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            ApplicationContext.Set<T>.Remove(entity);
+            //throw new NotImplementedException();
         }
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            ApplicationContext.Set<T>().Update(entity);
+            //throw new NotImplementedException();
         }
     }
 }
