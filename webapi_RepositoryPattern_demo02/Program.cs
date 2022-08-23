@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using webapi_RepositoryPattern_demo02;
+using webapi_RepositoryPattern_demo02.Contracts;
+using webapi_RepositoryPattern_demo02.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationContext>(opts =>
     opts.UseSqlServer("name=ConnectionStrings:sqlConnection"));
+
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 //opts.UseSqlServer(Configuration.GetConnection("sqlConnection"))
 //);
