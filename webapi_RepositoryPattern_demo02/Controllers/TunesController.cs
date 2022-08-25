@@ -32,7 +32,7 @@ namespace webapi_RepositoryPattern_demo02.Controllers
 
             _repository.Tune.CreateTune(tune);
             _repository.Save();
-            return Ok(tune);
+            return Ok();
         }
     }
 }
